@@ -2,6 +2,7 @@ package com.luv2code.cruddemo.dao;
 
 import com.luv2code.cruddemo.entity.Student;
 import jakarta.persistence.EntityManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,6 +13,7 @@ public class StudentDAOImpl implements StudentDAO {
     private EntityManager entityManager;
 
     //define constructor
+    @Autowired
     public StudentDAOImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
@@ -23,4 +25,9 @@ public class StudentDAOImpl implements StudentDAO {
         entityManager.persist(theStudent);
 
     }
+
+     @Override
+        public Student findStudentById(int theId) {
+            return entityManager.find(Student.class, theId);
+     }
 }
